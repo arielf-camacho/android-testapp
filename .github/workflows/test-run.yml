@@ -1,0 +1,22 @@
+name: Run tests on Pull Request
+
+on: [pull_request]
+
+jobs:
+  common-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v2
+      - name: Bring submodules
+        env:
+          PAT: ${{secrets.QUALITYGATE_PAT}}
+        run: |
+          git config --file .gitmodules --get-regexp url | while read url; do
+            git config --file=.gitmodules $(echo "$url" | sed -E "s/git@github.com:|https:\/\/github.com\//https:\/\/$PAT:$PAT@github.com\//")
+          done
+          git submodule sync
+          git submodule update --init --recursive
+      - name: Run unit tests
+        run: |
+          ./gradlew test
