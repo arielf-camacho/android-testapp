@@ -4,10 +4,11 @@ on: [pull_request]
 
 jobs:
   common-tests:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Clone project
         uses: actions/checkout@v2
+
       - name: Bring submodules
         env:
           PAT: ${{secrets.QUALITYGATE_PAT}}
@@ -17,6 +18,18 @@ jobs:
           done
           git submodule sync
           git submodule update --init --recursive
+
       - name: Run unit tests
-        run: |
-          ./gradlew test
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: |
+            echo "Installing Appium ---------------------------------------------------------------"
+            npm init -y
+            npm i appium
+
+            echo "Running Appium ------------------------------------------------------------------"
+            nohup ./node_modules/.bin/appium &
+
+            echo "Execute tests -------------------------------------------------------------------"
+            ./gradlew build test && sudo killall -9 node
