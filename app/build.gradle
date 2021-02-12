@@ -73,3 +73,13 @@ dependencies {
 
     testImplementation 'com.github.appium:java-client:7.3.0'
 }
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}
+
+tasks.testDebugUnitTest.enabled = false

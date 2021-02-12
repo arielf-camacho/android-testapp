@@ -32,7 +32,9 @@ jobs:
             nohup ./node_modules/.bin/appium &
 
             echo "Execute tests -------------------------------------------------------------------"
-            ./gradlew build testRelease
+            ./gradlew build test
             RESULT=$?
+            echo "Killing Appium ------------------------------------------------------------------"
             pgrep node | xargs -n1 kill
+            echo "Exiting with code: $RESULT" -----------------------------------------------------"
             exit $RESULT
