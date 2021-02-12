@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { _ ->
             Toast.makeText(applicationContext,"AAA",Toast.LENGTH_SHORT).show();
         }
     }
