@@ -81,5 +81,3 @@ tasks.withType(Test) {
         showStandardStreams true
     }
 }
-
-tasks.testDebugUnitTest.enabled = false
