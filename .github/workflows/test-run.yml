@@ -19,17 +19,17 @@ jobs:
           git submodule sync
           git submodule update --init --recursive
 
-      - name: Run unit tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: |
-            echo "Installing Appium ---------------------------------------------------------------"
-            npm init -y
-            npm i appium
-
-            echo "Running Appium ------------------------------------------------------------------"
-            nohup ./node_modules/.bin/appium &
-
-            echo "Execute tests -------------------------------------------------------------------"
-            ./gradlew build test && sudo killall -9 node
+#      - name: Run unit tests
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 29
+#          script: |
+#            echo "Installing Appium ---------------------------------------------------------------"
+#            npm init -y
+#            npm i appium
+#
+#            echo "Running Appium ------------------------------------------------------------------"
+#            nohup ./node_modules/.bin/appium &
+#
+#            echo "Execute tests -------------------------------------------------------------------"
+#            ./gradlew build test && sudo killall -9 node
